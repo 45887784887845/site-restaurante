@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurante Avenida | Cardápio & Marmitex</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #e65100;
+      --primary-hover: #cc4400;
+      --primary-light: #fff3e0;
+      --accent: #ffb300;
+      --dark: #1e1e24;
+      --dark-surface: #2b2b36;
+      --text: #2d3748;
+      --text-muted: #718096;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --whatsapp: #25d366;
+      --whatsapp-hover: #1eb956;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Top Banner Announcement */
+    .top-bar {
+      background: linear-gradient(90deg, #d84315, #f57c00);
+      color: white;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Header & Hero */
+    header {
+      background: linear-gradient(rgba(18, 18, 22, 0.88), rgba(18, 18, 22, 0.92)), 
+                  url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      color: white;
+      padding: 40px 20px 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    .brand-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title span {
+      color: var(--accent);
+    }
+
+    .brand-subtitle {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .header-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .location-badge, .phone-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .phone-badge {
+      background: rgba(37, 211, 102, 0.25);
+      border-color: rgba(37, 211, 102, 0.4);
+      font-weight: 700;
+    }
+
+    .phone-badge:hover {
+      background: rgba(37, 211, 102, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .location-badge i {
+      color: var(--accent);
+    }
+
+    .phone-badge i {
+      color: var(--whatsapp);
+    }
+
+    /* Container Principal */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Cards de Preço / Marmitex */
+    .pricing-section {
+      margin-top: -30px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .price-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #edf2f7;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .price-card.featured {
+      border: 2px solid var(--primary);
+    }
+
+    .price-card.featured::before {
+      content: 'Mais Pedida';
+      position: absolute;
+      top: 12px;
+      right: -30px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 30px;
+      transform: rotate(45deg);
+    }
+
+    .price-size {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .price-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .price-value span {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .price-extra {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Seção Especial Sábado Feijoada */
+    .special-feijoada {
+      background: linear-gradient(135deg, #1e1e24 0%, #2b2b36 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 24px 30px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: var(--card-shadow);
+      border-left: 6px solid var(--accent);
+    }
+
+    .feijoada-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feijoada-info p {
+      color: #cbd5e0;
+      font-size: 0.95rem;
+    }
+
+    .feijoada-price {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .feijoada-price-tag {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* Navegação dos Dias da Semana */
+    .menu-section {
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 20px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .day-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      scrollbar-width: thin;
+    }
+
+    .day-tab {
+      background: var(--white);
+      border: 1px solid #e2e8f0;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .day-tab:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary-light);
+    }
+
+    .day-tab.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
+    }
+
+    .day-tab.today::after {
+      content: 'Hoje';
+      background: var(--accent);
+      color: var(--dark);
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    /* Conteúdo do Cardápio */
+    .menu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #edf2f7;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .menu-day-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .menu-category-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .menu-list {
+      list-style: none;
+    }
+
+    .menu-item {
+      padding: 8px 0;
+      border-bottom: 1px dashed #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .menu-item i {
+      color: #10b981;
+      font-size: 0.8rem;
+    }
+
+    /* Simulador de Pedido */
+    .order-builder {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #edf2f7;
+      margin-top: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-size: 0.95rem;
+    }
+
+    .form-select, .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .form-select:focus, .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.15);
+    }
+
+    .btn-whatsapp {
+      width: 100%;
+      background-color: var(--whatsapp);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+    }
+
+    .btn-whatsapp:hover {
+      background-color: var(--whatsapp-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Botão Flutuante do WhatsApp */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--whatsapp);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      background-color: var(--whatsapp-hover);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 40px 20px 20px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .footer-info {
+      color: #a0aec0;
+      font-size: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .footer-info a {
+      color: var(--whatsapp);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .brand-title {
+        font-size: 2.1rem;
+      }
+      .special-feijoada {
+        flex-direction: column;
+        text-align: center;
+      }
+      .feijoada-price {
+        text-align: center;
+      }
+      .menu-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior de Avisos -->
+  <div class="top-bar">
+    <i class="fa-solid fa-utensils"></i>
+    <span>Marmitex caseira feita com tempero especial todos os dias!</span>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="brand-container">
+      <h1 class="brand-title">RESTAURANTE <span>AVENIDA</span></h1>
+      <p class="brand-subtitle">Comida caseira de verdade, ingrediente selecionado e sabor inesquecível</p>
+      
+      <div class="header-badges">
+        <div class="location-badge">
+          <i class="fa-solid fa-
